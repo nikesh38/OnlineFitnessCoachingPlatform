@@ -27,7 +27,7 @@ Primary features:
 - Trainees can browse programs, enroll and track progress.
 - Progress entries support photos and CSV export.
 - Messaging between users (basic).
-
+---
 ## Database
 
 1. Install MySQL (or use Docker)
@@ -46,18 +46,19 @@ username = "your_db_user";
 password = "your_db_password";
 driver = "com.mysql.cj.jdbc.Driver";
 
-
 If using a properties file, ensure the servlet container (Tomcat) can access it and DBUtil reads it.
-
+```
 Build & Deploy
-
+---
 Build with Maven:
 
 mvn -U clean package
 
+Run tomcat:
+mvn tomcat7:run
 
 Deploy target/OnlineFitnessCoaching-1.0-SNAPSHOT.war to Apache Tomcat (drop into webapps/) or use your IDE's run configuration.
-
+---
 Open in browser:
 
 http://localhost:8080/OnlineFitnessCoaching/
@@ -120,11 +121,8 @@ Use consistent id types across model, DAO, and servlets.
 
 Add simple validation in servlets before calling DAOs.
 
-License
-
-MIT-style (for personal / educational use).
-
-schema.sql
+--- 
+```schema.sql
 -- schema.sql
 -- MySQL schema for OnlineFitnessCoaching
 -- Run against the database you created (example: onlinefitness)
@@ -218,7 +216,7 @@ CREATE TABLE IF NOT EXISTS coach_approvals (
   FOREIGN KEY (coach_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (approver_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+```
 -- optional indexes
 CREATE INDEX idx_program_coach ON programs(coach_id);
 CREATE INDEX idx_workout_program ON workouts(program_id);
